@@ -8,6 +8,12 @@
     <p>
       <%= link_to "Show this friend", friend %>
     </p>
+    <p>
+      <%= link_to "Edit this friend", edit_friend_path(friend) %>
+    </p>
+    <p>
+      <%= button_to "Delete this friend", friend, method: :delete %>
+    </p>
   <% end %>
 </div>
 
