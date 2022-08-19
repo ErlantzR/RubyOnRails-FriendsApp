@@ -14,16 +14,18 @@
 
     <tbody class="table-group-divider">
       <% @friends.each do |friend| %>
-        <tr>
-          <td><%= friend.first_name %></td>
-          <td><%= friend.last_name %></td>
-          <td><%= friend.email %></td>
-          <td><%= friend.phone %></td>
-          <td><%= friend.twitter %></td>
-          <td><%= link_to "Show", friend, class:"btn btn-secondary" %></td>
-          <td><%= link_to "Edit", edit_friend_path(friend), class:"btn btn-secondary" %></td>
-          <td><%= button_to "Delete", friend, method: :delete, class:"btn btn-secondary" %></td>
-        </tr>
+        <% if friend.user == current_user %>
+          <tr>
+            <td><%= friend.first_name %></td>
+            <td><%= friend.last_name %></td>
+            <td><%= friend.email %></td>
+            <td><%= friend.phone %></td>
+            <td><%= friend.twitter %></td>
+            <td><%= link_to "Show", friend, class:"btn btn-secondary" %></td>
+            <td><%= link_to "Edit", edit_friend_path(friend), class:"btn btn-secondary" %></td>
+            <td><%= button_to "Delete", friend, method: :delete, class:"btn btn-secondary" %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
