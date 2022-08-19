@@ -1,34 +1,41 @@
-<h1>Friends List</h1>
-<div id="friends">
-  <table class="table table-hover align-middle">
-    <thead>
-      <tr>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Twitter</th>
-        <th colspan= "3"></th>
-      </tr>
-    </thead>
+<% if current_user %>
+  <h1>Friends List</h1>
+  <div id="friends">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Twitter</th>
+          <th colspan= "3"></th>
+        </tr>
+      </thead>
 
-    <tbody class="table-group-divider">
-      <% @friends.each do |friend| %>
-        <% if friend.user == current_user %>
-          <tr>
-            <td><%= friend.first_name %></td>
-            <td><%= friend.last_name %></td>
-            <td><%= friend.email %></td>
-            <td><%= friend.phone %></td>
-            <td><%= friend.twitter %></td>
-            <td><%= link_to "Show", friend, class:"btn btn-secondary" %></td>
-            <td><%= link_to "Edit", edit_friend_path(friend), class:"btn btn-secondary" %></td>
-            <td><%= link_to "Delete", friend, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class:"btn btn-secondary" %></td>
-          </tr>
+      <tbody class="table-group-divider">
+        <% @friends.each do |friend| %>
+          <% if friend.user == current_user %>
+            <tr>
+              <td><%= friend.first_name %></td>
+              <td><%= friend.last_name %></td>
+              <td><%= friend.email %></td>
+              <td><%= friend.phone %></td>
+              <td><%= friend.twitter %></td>
+              <td><%= link_to "Show", friend, class:"btn btn-secondary" %></td>
+              <td><%= link_to "Edit", edit_friend_path(friend), class:"btn btn-secondary" %></td>
+              <td><%= link_to "Delete", friend, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class:"btn btn-secondary" %></td>
+            </tr>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </tbody>
+    </table>
+  </div>
 
-<%= link_to "New friend", new_friend_path, class:"btn btn-light" %>
+  <%= link_to "New friend", new_friend_path, class:"btn btn-light" %>
+<% else %>
+  <h1>Welcome to my first app using Ruby on Rails</h1>
+  <p>You can sign up and create a list of contacts (friends) which only you can see, edit and delete if you wish</p>
+  <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-secondary" %>
+  <%= link_to "Sign In", new_user_session_path, class: "btn btn-secondary" %>
+<% end %>
